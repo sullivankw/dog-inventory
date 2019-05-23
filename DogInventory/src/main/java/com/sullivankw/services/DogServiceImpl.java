@@ -11,8 +11,7 @@ import org.springframework.util.Assert;
 import com.sullivankw.Action;
 import com.sullivankw.DogUtils;
 import com.sullivankw.daos.DogDaoInMemoryImpl;
-
-import models.Dog;
+import com.sullivankw.models.Dog;
 
 @Service
 public class DogServiceImpl implements DogService{

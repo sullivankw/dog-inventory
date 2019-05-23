@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import models.Dog;
+import com.sullivankw.models.Dog;
 
 @Component
 public class DogDaoInMemoryImpl implements DogDao{

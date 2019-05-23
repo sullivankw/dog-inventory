@@ -2,7 +2,7 @@ package com.sullivankw.daos;
 
 import java.util.List;
 
-import models.Dog;
+import com.sullivankw.models.Dog;
 
 public interface DogDao {
 	
