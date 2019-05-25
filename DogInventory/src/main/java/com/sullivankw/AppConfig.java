@@ -1,10 +1,7 @@
 package com.sullivankw;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -42,15 +39,5 @@ public class AppConfig {
 		}
 		throw new Exception();
 	}
-	
-	@Bean
-	 public BufferedReader getBufferedReader() throws Exception {
-		try {
-			return new BufferedReader(new FileReader(getFile()));
-		} catch (FileNotFoundException e) {
-			LOGGER.error("Must exit program. Unable to create appened BufferedReader.");
-		} 
-		throw new Exception();
-	}
-	
+		
 }
