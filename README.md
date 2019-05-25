@@ -12,8 +12,9 @@
 http://localhost:8080/dogInventory/dogs/{id}
 
 *To do a POST you will need a tool such as POSTMAN
-* select POST and raw at http://localhost:8080/dogInventory/dogs and press Send
- Below is a sample POST you could execute
+* select POST and raw and enter the url  http://localhost:8080/dogInventory/dogs. Hit Send. 
+
+Sample POST http://localhost:8080/dogInventory/dogs
 
     {
         "name": "spot",
@@ -28,7 +29,7 @@ http://localhost:8080/dogInventory/dogs/{id}
 *To do a PUT you must select PUT http://localhost:8080/dogInventory/dogs/{id} where
 id is of the Dog you want to edit. To change the owner name and add a new note to the entry above we may try something like this where we already did a GET and retrieved the id
 
-PUT http://localhost:8080/dogInventory/dogs/567445
+Sample PUT http://localhost:8080/dogInventory/dogs/567445
 
     {
         "name": "spot",
