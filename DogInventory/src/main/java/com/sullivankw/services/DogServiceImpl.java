@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
 
 import com.sullivankw.Action;
 import com.sullivankw.DogUtils;
-import com.sullivankw.daos.DogDaoInMemoryImpl;
+import com.sullivankw.daos.DogDao;
 import com.sullivankw.models.Dog;
 
 @Service
@@ -19,7 +19,7 @@ public class DogServiceImpl implements DogService{
 	private static Logger LOGGER = LoggerFactory.getLogger(DogServiceImpl.class);
 	
 	@Autowired
-	DogDaoInMemoryImpl dogDao;
+	DogDao dogDao;
 
 	@Override
 	public Dog getOne(int id) {	
@@ -57,7 +57,8 @@ public class DogServiceImpl implements DogService{
 		if (oldDog == null) {
 			return DogUtils.createFailedDisplayMessage(Action.UPDATE);
 		}
-		Dog updatedDog = dogDao.update(oldDog, newDog);
+		newDog.setId(oldDog.getId());	
+		Dog updatedDog = dogDao.update(newDog);
 		LOGGER.debug("update successful for {}", updatedDog.toString());
 		return DogUtils.createSuccessDisplayMessage(Action.UPDATE);
 		

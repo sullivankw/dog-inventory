@@ -8,7 +8,7 @@ public interface DogDao {
 	
 	Dog getOne(int id);
 	List<Dog> getAll();
-	Dog update(Dog oldDog, Dog newDog);
+	Dog update(Dog newDog);
 	void delete(int id);
 	void create(Dog dog);
 

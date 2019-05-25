@@ -3,11 +3,8 @@ package com.sullivankw.daos;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.sullivankw.models.Dog;
 
-@Component
 public class DogDaoInMemoryImpl implements DogDao{
 	
 	private static List<Dog> dogs;
@@ -70,11 +67,11 @@ public class DogDaoInMemoryImpl implements DogDao{
 	}
 
 	@Override
-	public Dog update(Dog oldDog, Dog newDog) {
-		dogs.removeIf(d -> d.getId() == oldDog.getId());
-		newDog.setId(oldDog.getId());
-		dogs.add(newDog);
-		return newDog;
+	public Dog update(Dog newDog) {
+//		dogs.removeIf(d -> d.getId() == oldDog.getId());
+//		newDog.setId(oldDog.getId());
+//		dogs.add(newDog);
+		return null;
 		
 	}
 
