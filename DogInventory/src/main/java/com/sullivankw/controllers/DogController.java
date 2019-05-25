@@ -42,8 +42,7 @@ public class DogController {
     }
     @PostMapping
     public List<Dog>add(@RequestBody Dog dog) {
-    	dogService.create(dog);
-    	return dogService.getAll();
+    	return dogService.create(dog);
     }
 
 }

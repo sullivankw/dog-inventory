@@ -10,6 +10,6 @@ public interface DogService {
 	String update(int oldDogId, Dog newDog);
 	Dog getOne(int id);
 	List<Dog> getAll();
-	void create(Dog dog);
+	List<Dog> create(Dog dog);
 
 }

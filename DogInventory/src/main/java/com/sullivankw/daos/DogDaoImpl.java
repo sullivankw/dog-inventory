@@ -3,6 +3,8 @@ package com.sullivankw.daos;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,17 +31,20 @@ public class DogDaoImpl implements DogDao {
 	
 	@Autowired
 	private BufferedWriter appendedBufferWriter;
-
-	@Autowired
-	private BufferedReader bufferedReader;
 	
 	@Override
 	public List<Dog> getAll() {
 		List<Dog> dogList = new ArrayList<Dog>();
+		BufferedReader bufferedReader;
+		try {
+			bufferedReader = new BufferedReader(new FileReader(file));
 			Dog[] dogs = new Gson().fromJson(bufferedReader, Dog[].class);
 			if (dogs != null) {
 				dogList = DogUtils.convertArrayToArrayList(dogs);
 			}
+		} catch (FileNotFoundException e) {
+			LOGGER.error("unable to retrieve dog list. ()", e.getCause());
+		}
 		return dogList;
 	}
 	
@@ -71,7 +76,7 @@ public class DogDaoImpl implements DogDao {
 		try {
 			addAll(new GsonBuilder().create(),dogs);
 		} catch (IOException e) {
-			LOGGER.error("unable to reload list");
+			LOGGER.error("unable to reload list. ()", e.getCause());
 		}
 		
 	}
@@ -96,7 +101,7 @@ public class DogDaoImpl implements DogDao {
 					addAll(gson, dogs);
 				}
 			} catch (IOException e) {
-				LOGGER.error("error creating entry or reloading list");
+				LOGGER.error("error creating entry or reloading list {}", e.getCause());
 			}
 		
 		

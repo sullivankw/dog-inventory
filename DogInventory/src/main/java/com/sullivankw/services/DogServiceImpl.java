@@ -32,12 +32,13 @@ public class DogServiceImpl implements DogService{
 	}
 
 	@Override
-	public void create(Dog dog) {
+	public List<Dog> create(Dog dog) {
     	Assert.notNull(dog, "dog is required");
     	Assert.notNull(dog.getName(), "dog name is required");
     	Assert.notNull(dog.getOwnerName(), "owner name is required");
     	Assert.notNull(dog.getNotes(), "notes is required");
 		dogDao.create(dog);
+		return getAll();
 		
 	}
 	
