@@ -49,6 +49,7 @@ public class DogServiceImpl implements DogService{
 			return DogUtils.createFailedDisplayMessage(Action.DELETE);
 		}
 			dogDao.delete(id);
+			LOGGER.debug("delete successful for {}", dogToDelete.toString());
 			return DogUtils.createSuccessDisplayMessage(Action.DELETE);		
 	}
 

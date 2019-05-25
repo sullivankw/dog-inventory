@@ -29,8 +29,7 @@ public class DogDaoImpl implements DogDao {
 	@Autowired
 	private File file;
 	
-	@Autowired
-	private BufferedWriter appendedBufferWriter;
+	private BufferedWriter bufferedWriter;
 	
 	@Override
 	public List<Dog> getAll() {
@@ -89,13 +88,15 @@ public class DogDaoImpl implements DogDao {
 		Gson gson = new GsonBuilder().create();
 		String dogAsJson = gson.toJson(dog);
 		List<Dog> dogs = getAll();
+		BufferedWriter bufferedWriter = null;
 			try {	
 				if (CollectionUtils.isEmpty(dogs)) {
-					appendedBufferWriter.write('[');
-					appendedBufferWriter.write(dogAsJson);
-					appendedBufferWriter.write(']');
-					appendedBufferWriter.flush();
-					appendedBufferWriter.close();
+					bufferedWriter = getBufferedWriter();
+					bufferedWriter.write('[');
+					bufferedWriter.write(dogAsJson);
+					bufferedWriter.write(']');
+					bufferedWriter.flush();
+					bufferedWriter.close();
 				} else {
 					dogs.add(dog);
 					addAll(gson, dogs);
@@ -103,30 +104,34 @@ public class DogDaoImpl implements DogDao {
 			} catch (IOException e) {
 				LOGGER.error("error creating entry or reloading list {}", e.getCause());
 			}
-		
-		
+				
 	}
 
 	private void addAll(Gson gson, List<Dog> dogs) throws IOException {
-		writeFirstEntry(gson.toJson(dogs.get(0)));
+		BufferedWriter bufferedWriter = getBufferedWriter();
+		writeFirstEntry(bufferedWriter, gson.toJson(dogs.get(0)));
 		for (int i =1; i < dogs.size(); i ++) {
-			appendedBufferWriter.write(',');
-			appendedBufferWriter.write(gson.toJson(dogs.get(i)));
+			bufferedWriter.write(',');
+			bufferedWriter.write(gson.toJson(dogs.get(i)));
 		}
-		appendedBufferWriter.write(']');
-		appendedBufferWriter.flush();
-		appendedBufferWriter.close();
+		bufferedWriter.write(']');
+		bufferedWriter.flush();
+		bufferedWriter.close();
 		
 	}
-
-	private void writeFirstEntry(String dogAsJson) throws IOException {	
-		//Can't create bean as once the FileWriter gets passed json.file with false it clears the file
-		//and doing this at startup would be too soon
-		BufferedWriter noAppendBufferedWriter = new BufferedWriter(new FileWriter(file, false));
-		noAppendBufferedWriter.write('[');
-		noAppendBufferedWriter.write(dogAsJson);
-		noAppendBufferedWriter.flush();
-		noAppendBufferedWriter.close();
+	
+	private void writeFirstEntry(BufferedWriter bufferedWriter,String dogAsJson) throws IOException {	
+		bufferedWriter.write('[');
+		bufferedWriter.write(dogAsJson);
+		bufferedWriter.flush();
+	}
+	
+	private BufferedWriter getBufferedWriter() throws IOException {	
+		if (bufferedWriter == null) {
+		return new BufferedWriter(new FileWriter(file, false));
+		} else {
+		return bufferedWriter;	
+		}
 	}
 
 }
