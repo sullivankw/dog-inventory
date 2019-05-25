@@ -12,7 +12,7 @@
 http://localhost:8080/dogInventory/dogs/{id}
 
 *To do a POST you will need a tool such as POSTMAN
-* select POST and raw and enter the url  http://localhost:8080/dogInventory/dogs. Hit Send. 
+* select POST, raw, application/JSON and enter the url  http://localhost:8080/dogInventory/dogs. Hit Send. 
 
 Sample POST http://localhost:8080/dogInventory/dogs
 
