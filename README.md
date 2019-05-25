@@ -13,7 +13,7 @@ http://localhost:8080/dogInventory/dogs/{id}
 
 *To do a POST you will need a tool such as POSTMAN
 * select POST and raw at http://localhost:8080/dogInventory/dogs and press Send
-* Below is a sample POST you could execute
+ Below is a sample POST you could execute
 
     {
         "name": "spot",
