@@ -1,9 +1,6 @@
 package com.sullivankw;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,15 +26,5 @@ public class AppConfig {
 		}
 		throw new Exception();
 	}	
-		
-	@Bean
-	 public BufferedWriter getDoAppendBufferWriter() throws Exception {
-		try {
-			return new BufferedWriter(new FileWriter(getFile(), true));
-		} catch (IOException e)  {
-		LOGGER.error("Must exit program. Unable to create appened BufferedWriter.");
-		}
-		throw new Exception();
-	}
-		
+				
 }
